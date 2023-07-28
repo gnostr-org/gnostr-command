@@ -46,44 +46,49 @@ fn example() {
 
 fn main() -> Result<()> {
 
-    let start = time::get_time();
-    let _epoch = get_epoch_ms();
-    let system_time = SystemTime::now();
-    let _datetime: DateTime<Utc> = system_time.into();
+#[cfg(debug_assertions)]
+    println!("Debugging enabled");
 
-    let args: Vec<String> = env::args().collect();
-    let dirname = &args[0];
+#[cfg(not(debug_assertions))]
+    println!("Debugging disabled");
 
-    if cfg!(debug_assertions) {
-        //println!("Debugging enabled");
-    } else {
-        //println!("Debugging disabled");
-    }
+let start = time::get_time();
+let _epoch = get_epoch_ms();
+let _system_time = SystemTime::now();
+let _datetime: DateTime<Utc> = _system_time.into();
 
-    #[cfg(debug_assertions)]
-    //println!("Debugging enabled");
+#[cfg(debug_assertions)]
+        let cwd = get_current_working_dir();
+        println!("cwd={:#?}", cwd);
 
-    #[cfg(not(debug_assertions))]
-    //println!("Debugging disabled");
+let args: Vec<String> = env::args().collect();
+let dirname = &args[0];
 
-    example();
-
-
-    let config = Config::build(&args).unwrap_or_else(|_err| {
-        println!("Usage: gnostr-command <string> <file>");
-        process::exit(1);
-    });
-
-    println!("Searching in {}", dirname);
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.file_path);
-
-    if let Err(e) = gnostr_command::run(config) {
-        println!("Application error: {e}");
-        process::exit(1);
-    }
-
-    let _duration = time::get_time() - start;
-    Ok(())
-
+if cfg!(debug_assertions) {
+    println!("Debugging enabled");
+} else {
+    println!("Debugging disabled");
 }
+
+example();
+
+
+let config = Config::build(&args).unwrap_or_else(|_err| {
+    println!("Usage: gnostr-command <string> <file>");
+    process::exit(1);
+});
+
+println!("Searching in {}", dirname);
+println!("Searching for {}", config.query);
+println!("In file {}", config.file_path);
+
+if let Err(e) = gnostr_command::run(config) {
+    println!("Application error: {e}");
+    process::exit(1);
+}
+
+
+
+let _duration = time::get_time() - start;
+Ok(())
+}//end main
