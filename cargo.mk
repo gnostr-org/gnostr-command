@@ -1,4 +1,4 @@
-cargo:## 	cargo commands
+cargo:## 	cargo  commands
 #                          cargo                    cargo
 	@awk 'BEGIN {FS = ":.*?#####	"} /^[a-zA-Z_-]+:.*?#####	/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
@@ -8,10 +8,10 @@ cargo-build:#####	cargo-build
 	@echo cargo b
 	@cargo b
 cargo-install:#####	cargo-install
-	@. $(HOME)/.cargo/env
-	@echo cargo install --path $(PWD)
+	@. $(HOME)/.cargo/env>/tmp/gnostr-command.log
+#@echo cargo install --path $(PWD)
 	@cargo install --path $(PWD)
-	@echo "export PATH=$(CARGO_PATH)/bin:$(PATH)"
+#@echo "export PATH=$(CARGO_PATH)/bin:$(PATH)"
 cargo-check:#####	cargo-check
 	@. $(HOME)/.cargo/env
 	@echo cargo c
@@ -30,8 +30,8 @@ cargo-test:#####	cargo-test
 	@cargo test
 cargo-build-release:#####	cargo-build-release
 ##make cargo-build-release && ./target/release/gnostr-command gr README.md
-	@. $(HOME)/.cargo/env
-	@echo cargo b --release
+	@. $(HOME)/.cargo/env>/tmp/gnostr-command.log
+	#@echo cargo b --release
 	@cargo b --release
 
 # vim: set noexpandtab:
