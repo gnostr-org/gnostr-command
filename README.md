@@ -1,1 +1,1 @@
-# gnostr-grep
+# gnostr-command template
