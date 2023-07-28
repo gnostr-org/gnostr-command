@@ -62,21 +62,21 @@ report:## 	print some variables
 	@echo 'CARGO=${CARGO}'
 	@echo ''
 
-run:## 	run
-##cargo test
+install:cargo-install## 	
+##install: cargo-install
+run-tests:## 	run-tests
+##run tests
+##	make gnostr-command
+	@$(MAKE) gnostr-command
+##	cargo test
 	cargo test
-	RUST_BACKTRACE=1 cargo run -- the poem.txt
-	RUST_BACKTRACE=1 cargo run -- frog poem.txt
-	RUST_BACKTRACE=1 cargo run -- body poem.txt
-	RUST_BACKTRACE=1 cargo run -- monomorphization poem.txt
-	#RUST_BACKTRACE=1 cargo run --     poem.txt
-	@$(MAKE) gnostr-legit
-gnostr-command:##
+##	RUST_BACKTRACE=1 cargo run -- gnostr README.md
+	RUST_BACKTRACE=1 cargo run -- gnostr README.md
+##	RUST_BACKTRACE=1 cargo run -- relays .git
+	RUST_BACKTRACE=1 cargo run -- relays .git
+gnostr-command:cargo-install##
 ##gnostr-command
-	gnostr-git status
-	@gnostr-legit
-	@gnostr-git add .gnostr
-	@git config -l | grep "gnostr" > .gnostr/gnostr.relays
+	@which gnostr-command
 
 
 -include docker.mk
