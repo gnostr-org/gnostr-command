@@ -7,11 +7,11 @@ use std::path::PathBuf;
 extern crate time;
 extern crate chrono;
 use chrono::{DateTime,Utc};
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
-use std::thread::sleep;
+use std::time::{SystemTime, UNIX_EPOCH};
+
 
 //shell commands
-use std::process::Command;
+
 
 //lib.rs
 use gnostr_command::Config;
@@ -47,9 +47,9 @@ fn example() {
 fn main() -> Result<()> {
 
     let start = time::get_time();
-    let epoch = get_epoch_ms();
+    let _epoch = get_epoch_ms();
     let system_time = SystemTime::now();
-    let datetime: DateTime<Utc> = system_time.into();
+    let _datetime: DateTime<Utc> = system_time.into();
 
     let args: Vec<String> = env::args().collect();
     let dirname = &args[0];
@@ -83,7 +83,7 @@ fn main() -> Result<()> {
         process::exit(1);
     }
 
-    let duration = time::get_time() - start;
+    let _duration = time::get_time() - start;
     Ok(())
 
 }
