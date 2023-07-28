@@ -1,7 +1,6 @@
 use std::env;
 use std::process;
 use std::io::{Result};
-use std::path::PathBuf;
 
 //time functions
 extern crate time;
@@ -9,6 +8,8 @@ extern crate chrono;
 use chrono::{DateTime,Utc};
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[cfg(debug_assertions)]
+use std::path::PathBuf;
 
 //shell commands
 
@@ -23,6 +24,7 @@ fn get_epoch_ms() -> u128 {
         .unwrap()
         .as_millis()
 }
+#[cfg(debug_assertions)]
 fn get_current_working_dir() -> std::io::Result<PathBuf> {
     env::current_dir()
 }
@@ -46,28 +48,34 @@ fn example() {
 
 fn main() -> Result<()> {
 
-#[cfg(debug_assertions)]
-    println!("Debugging enabled");
-
-#[cfg(not(debug_assertions))]
-    println!("Debugging disabled");
+//#[cfg(debug_assertions)]
+//    println!("Debugging enabled");
+//
+//#[cfg(not(debug_assertions))]
+//    //println!("Debugging disabled");
 
 let start = time::get_time();
+#[cfg(debug_assertions)]
+        println!("start={:#?}", start);
+
 let _epoch = get_epoch_ms();
 let _system_time = SystemTime::now();
 let _datetime: DateTime<Utc> = _system_time.into();
 
 #[cfg(debug_assertions)]
         let cwd = get_current_working_dir();
+#[cfg(debug_assertions)]
         println!("cwd={:#?}", cwd);
 
 let args: Vec<String> = env::args().collect();
 let dirname = &args[0];
 
 if cfg!(debug_assertions) {
+    #[cfg(debug_assertions)]
     println!("Debugging enabled");
 } else {
-    println!("Debugging disabled");
+    //#[cfg(not(debug_assertions))]
+    //println!("Debugging disabled");
 }
 
 example();
