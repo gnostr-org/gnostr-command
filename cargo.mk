@@ -1,38 +1,34 @@
-cargo:## 	cargo  commands
-#                          cargo                    cargo
-	@awk 'BEGIN {FS = ":.*?#####	"} /^[a-zA-Z_-]+:.*?#####	/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
-
-cargo-build:#####	cargo-build
-##make cargo-build && ./target/debug/gnostr-command gr README.md
+##	
+##make cargo-*
+cargo-help:### 	
+	@awk 'BEGIN {FS = ":.*?###"} /^[a-zA-Z_-]+:.*?###/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+cargo-b:cargo-build###	cargo b
+cargo-build:###	cargo build
+## 	make cargo-build q=true
 	@. $(HOME)/.cargo/env
-	@echo cargo b
-	@cargo b
-cargo-install:#####	cargo-install
-	@. $(HOME)/.cargo/env>/tmp/gnostr-command.log
-#@echo cargo install --path $(PWD)
-	@cargo install --path $(PWD)
-#@echo "export PATH=$(CARGO_PATH)/bin:$(PATH)"
-cargo-check:#####	cargo-check
+	@RUST_BACKTRACE=all cargo b $(QUIET)
+cargo-install:###	cargo install --path .
+#@. $(HOME)/.cargo/env
+	#@cargo install --path $(PWD)
+	@cargo install --locked --path $(PWD)
+cargo-br:cargo-build-release###	cargo-br
+## 	make cargo-br q=true
+cargo-build-release:###	cargo-build-release
+## 	make cargo-build-release q=true
 	@. $(HOME)/.cargo/env
-	@echo cargo c
+	@cargo b --release $(QUIET)
+cargo-check:###	cargo-check
+	@. $(HOME)/.cargo/env
 	@cargo c
-cargo-bench:#####	cargo-bench
+cargo-bench:###	cargo-bench
 	@. $(HOME)/.cargo/env
-	@echo cargo bench
 	@cargo bench
-cargo-clean:#####	cargo-clean
+cargo-test:###	cargo-test
 	@. $(HOME)/.cargo/env
-	@echo cargo clean
-	@cargo clean
-cargo-test:#####	cargo-test
-	@. $(HOME)/.cargo/env
-	@echo cargo test
 	@cargo test
-cargo-build-release:#####	cargo-build-release
-##make cargo-build-release && ./target/release/gnostr-command gr README.md
-	@. $(HOME)/.cargo/env>/tmp/gnostr-command.log
-	#@echo cargo b --release
-	@cargo b --release
+cargo-report:###	cargo-report
+	@. $(HOME)/.cargo/env
+	cargo report future-incompatibilities --id 1
 
 # vim: set noexpandtab:
 # vim: set setfiletype make
