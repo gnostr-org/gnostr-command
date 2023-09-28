@@ -1,6 +1,6 @@
 [package]
 name = "gnostr-command"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2018"
 description = "gnostr-command: gnostr rust command template"
 authors = ["admin@gnostr.org <admin@gnostr.org>"]
@@ -18,3 +18,5 @@ time = "0.1.42"
 chrono = "0"
 io = "0.0.2"
 use = "0.0.0"
+nostr = "0.24.0"
+nostr-sdk = "0.24.0"
