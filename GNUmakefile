@@ -90,16 +90,20 @@ rustup-install:## 	rustup-install
 	$(shell echo which rustup) && rustup default nightly
 
 
-cargo-build:## 	cargo-build
+cargo-b:## 	cargo-b
 	@type -P rustc || $(MAKE) rustup-install
 	cargo b
-cargo-build-release:## 	cargo-build-release
+cargo-b-release:## 	cargo-b-release
 	@type -P rustc || $(MAKE) rustup-install
 	cargo build --release
-cargo-check:## 	cargo-check
+cargo-c:## 	cargo-c
+	@type -P rustc || $(MAKE) rustup-install
 	cargo c
 install:cargo-install## 	install
-cargo-install:## 	cargo-install
+cargo-i:## 	cargo-i
+	@type -P rustc || $(MAKE) rustup-install
 	cargo install --path .
+
 -include Makefile
+-include cargo.mk
 -include act.mk
