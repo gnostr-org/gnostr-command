@@ -188,7 +188,7 @@ impl Config {
     let _frank:  String = String::from("Frank");
     let _bob:    String = String::from("Bob");
 
-    /// Setup for cargo-binstall additional gnostr-command utilities
+    // Setup for cargo-binstall additional gnostr-command utilities
     let install:       String = String::from("install");// we dont require --install
                                                         // TODO: test gnostr command   install
                                                         // TODO: test gnostr command --install
@@ -218,7 +218,19 @@ impl Config {
               println!("exec gnostr-cli install {:?}!", arg);
 
             }
-          }
+            if content.eq(&gnostr_grep) {
+              println!("exec gnostr-grep install {:?}!", arg);
+
+            }
+            if content.eq(&gnostr_legit) {
+              println!("exec gnostr-legit install {:?}!", arg);
+
+            }
+            if content.eq(&gnostr_sha256) {
+              println!("exec gnostr-sha256 install {:?}!", arg);
+
+            }
+          }// end if content.eq(&install)
 
           if content.eq(&_ferris) {
             println!("Matched {:?}!", arg);
