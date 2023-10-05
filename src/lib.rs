@@ -144,9 +144,49 @@ pub use protocol::{Command, CommandTx, DiscoveryKey, Event, Key, Protocol};
 pub use util::discovery_key;
 use std::error::Error;
 use std::process;
+use std::process::Command;
 use std::fs;
 
 #[derive(Debug)]
+use crate::process::Output;
+
+    static repo_root : String = std::env::args().nth(1).unwrap_or(".".to_string());
+    const repo_path : Output  =
+        if cfg!(target_os = "windows") {
+        Command::new("cmd")
+                .args(["/C", "cd"])
+                .output()
+                .expect("failed to execute process")
+        } else
+        if cfg!(target_os = "macos"){
+        Command::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        } else
+        if cfg!(target_os = "linux"){
+        Command::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        } else {
+        Command::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        };
+
+    static path : String = String::from_utf8(repo_path.stdout)
+    .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
+    .unwrap();
+    //println!("path={:?}", path);
+
+
+
+
 /// pub struct Config
 pub struct Config {
     pub query: String,
