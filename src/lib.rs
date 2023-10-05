@@ -44,9 +44,14 @@ impl Config {
     let _bob:    String = String::from("Bob");
 
     /// Setup for cargo-binstall additional gnostr-command utilities
-    let install:    String = String::from("--install");
+    let install:       String = String::from("install");// we dont require --install
+                                                        // TODO: test gnostr command   install
+                                                        // TODO: test gnostr command --install
     let gnostr_cat:    String = String::from("gnostr-cat");
     let gnostr_cli:    String = String::from("gnostr-cli");
+    let gnostr_grep:    String = String::from("gnostr-grep");
+    let gnostr_legit:    String = String::from("gnostr-legit");
+    let gnostr_sha256:    String = String::from("gnostr-sha256");
 
     if args.len() > 1 {
     let content = String::from(&args[1].clone());
