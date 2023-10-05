@@ -47,10 +47,12 @@ impl Config {
     let install:       String = String::from("install");// we dont require --install
                                                         // TODO: test gnostr command   install
                                                         // TODO: test gnostr command --install
-    let gnostr_cat:    String = String::from("gnostr-cat");
-    let gnostr_cli:    String = String::from("gnostr-cli");
-    let gnostr_grep:    String = String::from("gnostr-grep");
-    let gnostr_legit:    String = String::from("gnostr-legit");
+
+    let gnostr_cat:       String = String::from("gnostr-cat");
+    let gnostr_cli:       String = String::from("gnostr-cli");
+    let gnostr_command:   String = String::from("gnostr-command"); //update gnostr-command
+    let gnostr_grep:      String = String::from("gnostr-grep");
+    let gnostr_legit:     String = String::from("gnostr-legit");
     let gnostr_sha256:    String = String::from("gnostr-sha256");
 
     if args.len() > 1 {
@@ -63,26 +65,37 @@ impl Config {
           println!("arg=banana:{}", arg.eq(&banana));
 
           if content.eq(&install) {
+            #[cfg(debug_assertions)]
             println!("exec install sub argparse {:?}!", arg);
             let content = String::from(&args[2].clone());
             if content.eq(&gnostr_cat) {
-              println!("exec gnostr-cat install {:?}!", arg);
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-cat install {:?}!", args);
 
             }
             if content.eq(&gnostr_cli) {
-              println!("exec gnostr-cli install {:?}!", arg);
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-cli install {:?}!", args);
+
+            }
+            if content.eq(&gnostr_command) {
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-command install {:?}!", args);
 
             }
             if content.eq(&gnostr_grep) {
-              println!("exec gnostr-grep install {:?}!", arg);
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-grep install {:?}!", args);
 
             }
             if content.eq(&gnostr_legit) {
-              println!("exec gnostr-legit install {:?}!", arg);
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-legit install {:?}!", args);
 
             }
             if content.eq(&gnostr_sha256) {
-              println!("exec gnostr-sha256 install {:?}!", arg);
+              //#[cfg(debug_assertions)]
+              println!("exec gnostr-sha256 install {:?}!", args);
 
             }
           }// end if content.eq(&install)
