@@ -188,6 +188,11 @@ impl Config {
     let _frank:  String = String::from("Frank");
     let _bob:    String = String::from("Bob");
 
+    /// Setup for cargo-binstall additional gnostr-command utilities
+    let install:    String = String::from("--install");
+    let gnostr_cat:    String = String::from("gnostr-cat");
+    let gnostr_cli:    String = String::from("gnostr-cli");
+
     if args.len() > 1 {
     let content = String::from(&args[1].clone());
       for arg in args.iter() {
@@ -196,6 +201,19 @@ impl Config {
           println!("arg=apple:{}", arg.eq(&apple));
           #[cfg(debug_assertions)]
           println!("arg=banana:{}", arg.eq(&banana));
+
+          if content.eq(&install) {
+            println!("exec install sub argparse {:?}!", arg);
+            let content = String::from(&args[2].clone());
+            if content.eq(&gnostr_cat) {
+              println!("exec gnostr-cat install {:?}!", arg);
+
+            }
+            if content.eq(&gnostr_cli) {
+              println!("exec gnostr-cli install {:?}!", arg);
+
+            }
+          }
 
           if content.eq(&_ferris) {
             println!("Matched {:?}!", arg);
@@ -214,10 +232,34 @@ impl Config {
 
     }
 
-    if args.len() > 2 {
+    if args.len() == 3 {
+
+      // intercept return if
+      // gnostr-comand install gnostr-*
       let query = args[1].clone();
       let file_path = args[2].clone();
-      Ok(Config { query, file_path })
+
+      if query.eq(&install) {
+
+          //#[cfg(debug_assertions)]
+          println!("arg=query:{}", query);
+          //#[cfg(debug_assertions)]
+          println!("arg=install:{}", install);
+          //#[cfg(debug_assertions)]
+          println!("query=install:{}", query.eq(&install));
+
+          // intercept return if
+          // gnostr-comand install gnostr-*
+          Ok(Config { query, file_path })
+
+      } else {
+
+        let query = args[1].clone();
+        let file_path = args[2].clone();
+        Ok(Config { query, file_path })
+
+      }
+
     } else { process::exit(0); }
 
     }
@@ -226,23 +268,54 @@ impl Config {
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
     let contents = fs::read_to_string(config.file_path)?;
+    // println!("config.file_path:contents={}", contents);
+    if contents.contains("nostr") {
 
+      // cargo install cargo-binstall
+      // cargo-binstall contents string
+      println!("___________gnostr___________:contents={}", contents);
+
+      Ok(())
+
+    } else {
+
+        println!("contents={}", contents);
+        println!("&config.query={}", &config.query);
         for line in search(&config.query, &contents) {
+
             println!("{line}");
+
         }
+
     Ok(())
+
+    }
+
 }
+
+
+
 /// pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str>
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-let mut results = Vec::new();
-    for line in contents.lines() {
-        // do something with line
-        if line.contains(query) {
-            // do something with line
-            results.push(line);
-        }
-    }
-    results
+
+    let q = fs::read_to_string(query);
+    println!("_________q________={:?}", q);
+
+  let mut results = Vec::new();
+
+      for line in contents.lines() {
+
+          // do something with line
+          if line.contains(query) {
+
+              // do something with line
+              results.push(line);
+
+          }
+      }
+
+      results
+
 }
 
 #[cfg(test)]
