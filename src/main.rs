@@ -76,7 +76,7 @@ let dirname = &args[0];
 
 let config = Config::build(&args).unwrap_or_else(|_err| {
     println!("Usage: gnostr-command <string> <file>");
-    process::exit(1);
+    process::exit(0);
 });
 
 if cfg!(debug_assertions) {
