@@ -58,14 +58,18 @@ let start = time::get_time();
 let _epoch = get_epoch_ms();
 let _system_time = SystemTime::now();
 let _datetime: DateTime<Utc> = _system_time.into();
-let cwd = get_current_working_dir();
-
 #[cfg(debug_assertions)]
-        println!("start={:#?}", start);
-        println!("_epoch={:#?}", _epoch);
-        println!("_system_time={:#?}", _system_time);
-        println!("_datetime={:#?}", _datetime);
-        println!("cwd={:#?}", cwd);
+println!("start={:#?}", start);
+#[cfg(debug_assertions)]
+println!("_epoch={:#?}", _epoch);
+#[cfg(debug_assertions)]
+println!("_system_time={:#?}", _system_time);
+#[cfg(debug_assertions)]
+println!("_datetime={:#?}", _datetime);
+#[cfg(debug_assertions)]
+let cwd = get_current_working_dir();
+#[cfg(debug_assertions)]
+println!("cwd={:#?}", cwd);
 
 let args: Vec<String> = env::args().collect();
 let dirname = &args[0];
