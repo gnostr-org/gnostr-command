@@ -99,7 +99,8 @@ impl Config {
       let query = args[1].clone();
       let file_path = args[2].clone();
 
-      if query.eq(&install) {
+      //if query.contains(&install) {
+      if query.contains(&install) {
 
           //#[cfg(debug_assertions)]
           println!("arg=query:{}", query);
