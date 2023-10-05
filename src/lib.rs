@@ -1,10 +1,7 @@
 use std::fs;
-use std::env;
 use std::process;
 use std::process::Command;
 use std::error::Error;
-use std::{io};
-//use std::io::{Result};
 use crate::process::Output;
 
 /// pub struct Config
@@ -16,7 +13,7 @@ pub struct Config {
 /// impl Config
 impl Config {
 
-  pub fn get_path() -> Result<String, &'static str> {
+    pub fn build(args: &[String]) -> Result<Config, &'static str> {
 
     let path : Output  =
         if cfg!(target_os = "windows") {
@@ -49,29 +46,8 @@ impl Config {
     let repo_path = String::from_utf8(path.stdout)
     .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
     .unwrap();
-    //println!("path={:?}", path);
-
-    Ok(repo_path)
-
-  }
-
-
-    pub fn build(args: &[String]) -> Result<Config, &'static str> {
-
-      //#[cfg(debug_assertions)]
-      println!("args.len()={}",args.len());
-
-      //let names = vec!["Bob", "Frank", "Ferris"];
-      //for name in names.iter() {
-      //    match name {
-      //        &"Ferris" => println!("Ferris:There is a rustacean among us!"),
-      //        &"Frank" => println!("Frank:There is a rustacean among us!"),
-      //        &"Bob" => println!("Bob:There is a rustacean among us!"),
-      //        // TODO ^ Try deleting the & and matching just "Ferris"
-      //        _ => println!("Hello {}", name),
-      //    }
-      //}
-      //// println!("names: {:?}", names);
+    #[cfg(debug_assertions)]
+    println!("repo_path={:?}", repo_path);
 
 
     #[cfg(debug_assertions)]
@@ -103,46 +79,48 @@ impl Config {
 
     if args.len() > 1 {
     let content = String::from(&args[1].clone());
-      for arg in args.iter() {
+      for _arg in args.iter() {
 
           #[cfg(debug_assertions)]
-          println!("arg=apple:{}", arg.eq(&apple));
+          println!("_arg=apple:{}", _arg.eq(&apple));
           #[cfg(debug_assertions)]
-          println!("arg=banana:{}", arg.eq(&banana));
+          println!("_arg=banana:{}", _arg.eq(&banana));
 
           if args.len() == 3 {// gnostr-command install gnostr-*
                               // must be args.len() == 3
+                              //
             if content.eq(&install) {
               #[cfg(debug_assertions)]
-              println!("exec install sub argparse {:?}!", arg);
+              println!("exec install sub argparse {:?}!", _arg);
               let content = String::from(&args[2].clone());
+
               if content.eq(&gnostr_cat) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-cat install {:?}!", args);
 
               }
               if content.eq(&gnostr_cli) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-cli install {:?}!", args);
 
               }
               if content.eq(&gnostr_command) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-command install {:?}!", args);
 
               }
               if content.eq(&gnostr_grep) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-grep install {:?}!", args);
 
               }
               if content.eq(&gnostr_legit) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-legit install {:?}!", args);
 
               }
               if content.eq(&gnostr_sha256) {
-                //#[cfg(debug_assertions)]
+                #[cfg(debug_assertions)]
                 println!("exec gnostr-sha256 install {:?}!", args);
 
               }
@@ -153,19 +131,22 @@ impl Config {
           let content = String::from(&args[1].clone());
 
           if content.eq(&_ferris) {
-            println!("Matched {:?}!", arg);
+            #[cfg(debug_assertions)]
+            println!("Matched {:?}!", _arg);
             println!("Ferris:Hello {}", _ferris);
           }
           if content.eq(&_frank) {
-            println!("Matched {:?}!", arg);
+            #[cfg(debug_assertions)]
+            println!("Matched {:?}!", _arg);
             println!("Frank:Hello {}", _frank);
           }
           if content.eq(&_bob) {
-            println!("Matched {:?}!", arg);
+            #[cfg(debug_assertions)]
+            println!("Matched {:?}!", _arg);
             println!("Bob:Hello {}", _bob);
           }
 
-      }//end for arg in args.iter()
+      }//end for _arg in args.iter()
 
     }
 
@@ -179,22 +160,24 @@ impl Config {
       //if query.contains(&install) {
       if query.contains(&install) {
 
-          //#[cfg(debug_assertions)]
-          println!("arg=query:{}", query);
-          //#[cfg(debug_assertions)]
-          println!("arg=install:{}", install);
-          //#[cfg(debug_assertions)]
+          #[cfg(debug_assertions)]
+          println!("_arg=query:{}", query);
+          #[cfg(debug_assertions)]
+          println!("_arg=install:{}", install);
+          #[cfg(debug_assertions)]
           println!("query=install:{}", query.eq(&install));
 
           // intercept return if
           // gnostr-comand install gnostr-*
-          Ok(Config { query, file_path })
+
+          Ok(Config { query, file_path, repo_path })
 
       } else {
 
         let query = args[1].clone();
         let file_path = args[2].clone();
-        Ok(Config { query, file_path })
+
+        Ok(Config { query, file_path, repo_path })
 
       }
 
