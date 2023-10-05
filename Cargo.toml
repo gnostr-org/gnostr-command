@@ -1,6 +1,6 @@
 [package]
 name = "gnostr-command"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2018"
 description = "gnostr-command: gnostr rust command template"
 authors = ["admin@gnostr.org <admin@gnostr.org>"]
