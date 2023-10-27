@@ -5,6 +5,14 @@ PROJECT_NAME                            := $(project)
 endif
 export PROJECT_NAME
 
+## https://doc.rust-lang.org/cargo/reference/profiles.html#custom-profiles
+## CARGO_PROFILE_RELEASE_DEBUG
+ifeq ($(profile),)
+PROFILE=release
+else
+PROFILE=release-with-debug
+endif
+
 OS                                      :=$(shell uname -s)
 export OS
 OS_VERSION                              :=$(shell uname -r)

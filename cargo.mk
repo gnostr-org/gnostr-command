@@ -15,7 +15,7 @@ cargo-br:cargo-build-release### 	cargo-br
 cargo-build-release:### 	cargo-build-release
 ## 	make cargo-build-release q=true
 	@. $(HOME)/.cargo/env
-	@cargo b --release $(QUIET)
+	@cargo b $(QUIET) --profile=$(PROFILE)
 cargo-check:### 	cargo-check
 ## cargo c
 	@. $(HOME)/.cargo/env
