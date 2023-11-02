@@ -12,3 +12,5 @@ docker-build:
 	$(DOCKER) build -t miniscript .
 docker-run:
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make && install ./miniscript /usr/local/bin && miniscript"
+
+-include Makefile
