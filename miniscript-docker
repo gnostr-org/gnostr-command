@@ -10,14 +10,20 @@ function help {
 
     printf "Usage:\n"
     printf "\n"
-    printf "miniscript-docker\n"
-    printf "miniscript-docker       [-v --verbose]\n"
+    printf "  miniscript-docker\n"
+    printf "  miniscript-docker       [-v --verbose]\n"
     printf "\n"
-    printf "miniscript-docker help  [-h --help]\n"
-    printf "miniscript-docker make  [-m --make]\n"
-    printf "miniscript-docker build [-b --build]\n"
-    printf "Usage:\n"
-    printf "Usage:\n"
+    printf "  miniscript-docker help  [-h --help]\n"
+    printf "  miniscript-docker make  [-m --make]\n"
+    printf "  miniscript-docker build [-b --build]\n"
+    printf "\n"
+    printf "  miniscript-docker run <miniscript>"
+    printf "\n"
+    printf "\n"
+    printf "Examples:\n"
+    printf "\n"
+    printf "  miniscript-docker run \'thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))\'\n"
+    printf "\n"
 
     exit;
 }
@@ -47,15 +53,17 @@ function make {
 }
 function run () {
 
-    echo "\$1"=$1
-    echo "\$2"=$2
-    echo "\$3"=$3
+    ## echo "\$1"=$1
+    ## echo "\$2"=$2
+    ## echo "\$3"=$3
 
-    echo TAG=$TAG
-    echo FORCE=$FORCE
-    echo NOCACHE=$NOCACHE
-    echo VERBOSE=$VERBOSE
+    ## echo TAG=$TAG
+    ## echo FORCE=$FORCE
+    ## echo NOCACHE=$NOCACHE
+    ## echo VERBOSE=$VERBOSE
 	## remove on host - it may be a different OS
+    ## Usage:
+    ## miniscript-docker run "thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))"
     docker run --rm -v $PWD:/src $TAG sh -c "echo '$1' | ./miniscript" && \
     exit;
 
@@ -63,7 +71,7 @@ function run () {
 
 ## argparse
 ## position $1
-echo "\${!#}=${!#}"
+## echo "\${!#}=${!#}"
 while test $# -gt 0
 do
     case "$1" in
