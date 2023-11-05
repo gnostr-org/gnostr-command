@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+
+VERBOSE=${VERBOSE:-	}
+
+FORCE=${FORCE:-	}
+NOCACHE=${NOCACHE:-	} ## default rebuild without --no-cache
+TAG=${TAG:-miniscript}
+
+function help {
+
+    printf "Usage:\n"
+    printf "\n"
+    printf "miniscript-docker\n"
+    printf "miniscript-docker       [-v --verbose]\n"
+    printf "\n"
+    printf "miniscript-docker help  [-h --help]\n"
+    printf "miniscript-docker make  [-m --make]\n"
+    printf "miniscript-docker build [-b --build]\n"
+    printf "Usage:\n"
+    printf "Usage:\n"
+
+    exit;
+}
+
+function build {
+
+    echo TAG=$TAG
+    echo FORCE=$FORCE
+    echo NOCACHE=$NOCACHE
+    echo VERBOSE=$VERBOSE
+    [ "$NOCACHE" ]      && docker build --no-cache -t $TAG . && exit;
+    [ ! -z "$NOCACHE" ] && docker build $NOCACHE   -t $TAG . && exit;
+
+}
+
+function make {
+
+    echo TAG=$TAG
+    echo FORCE=$FORCE
+    echo NOCACHE=$NOCACHE
+    echo VERBOSE=$VERBOSE
+	## remove on host - it may be a different OS
+    rm ./miniscript || echo && \
+    docker run --rm -v $PWD:/src $TAG sh -c "make miniscript" && \
+    exit;
+
+}
+function run () {
+
+    echo "\$1"=$1
+    echo "\$2"=$2
+    echo "\$3"=$3
+
+    echo TAG=$TAG
+    echo FORCE=$FORCE
+    echo NOCACHE=$NOCACHE
+    echo VERBOSE=$VERBOSE
+	## remove on host - it may be a different OS
+    docker run --rm -v $PWD:/src $TAG sh -c "echo '$1' | ./miniscript" && \
+    exit;
+
+}
+
+## argparse
+## position $1
+echo "\${!#}=${!#}"
+while test $# -gt 0
+do
+    case "$1" in
+        verbose) VERBOSE=1; echo $VERBOSE
+            ;;
+        --verbose) VERBOSE=1; echo $VERBOSE
+            ;;
+        -v) VERBOSE=1; echo $VERBOSE
+            ;;
+        help) help;
+            ;;
+        --help) help;
+            ;;
+        -h) help;
+            ;;
+        --force) FORCE=--force; ## echo FORCE=$FORCE
+            ;;
+        -f)      FORCE=--force; ## echo FORCE=$FORCE
+            ;;
+        build) build
+            ;;
+        --build) build
+            ;;
+        -b) build
+            ;;
+        make) make
+            ;;
+        --make) make
+            ;;
+        -m) make
+            ;;
+        run) run $2 $3 $4
+            ;;
+        --*) echo "bad option $1"
+            ;;
+        *) echo "argument $1"
+            ;;
+    esac
+    shift
+done
+## position $2
+while test $# -gt 1
+do
+    case "$2" in
+        ## support docker-miniscript build -f
+        ##         docker-miniscript -f build
+        --force) FORCE=--force; ## echo FORCE=$FORCE
+            ;;
+        -f) FORCE=--force;      ## echo FORCE=$FORCE
+            ;;
+        build) build
+            ;;
+        --build) build
+            ;;
+        -b) build
+            ;;
+        make) make
+            ;;
+        --make) make
+            ;;
+        -m) make
+            ;;
+        --*) echo "bad option $1"
+            ;;
+        *) echo "argument $1"
+            ;;
+    esac
+    shift
+done
+
+
+
+# detect docker after argparse
+DOCKER=${DOCKER:-$(which docker)}
+[ -z "$DOCKER" ] && printf "'docker' not in \$PATH"
+
+[ "$1" == "make" ] && \
+    rm ./miniscript || echo && \
+    $DOCKER run --rm -v $PWD:/src miniscript sh -c "make miniscript" && \
+    exit;
+
+[ ! -z "$DOCKER" ] && \
+$DOCKER \
+run \
+--rm \
+--volume "`pwd`:/src" \
+miniscript \
+sh -c "echo '$1 $2 $3 $4' | ./miniscript"
+#"echo ' and(pk(A),or(pk(B),or(9@pk(C),older(1000))))' | ./miniscript"
