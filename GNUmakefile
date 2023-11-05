@@ -4,20 +4,23 @@ PWD=$(shell echo `pwd`)
 export PWD
 
 -:
-	echo $(PWD)
-	echo $(DOCKER)
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+## echo $(PWD)
+## echo $(DOCKER)
 
-docker:docker-build docker-run
-docker-build:
-	$(DOCKER) build -f miniscript.dockerfile -t miniscript .
-docker-make-miniscript:
-	rm ./miniscript || echo
-	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
-docker-install-miniscript:
+docker:docker-build docker-run## 	docker-build docker-run
+docker-build:## 	docker build -f Dockerfile -t miniscript .
+	$(DOCKER) build -f Dockerfile -t miniscript .
+docker-make-miniscript:## 	docker-make-miniscript
+##if the miniscript binary doesnt include linux we rm ./miniscript
+	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
+	@$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
+
+docker-install-miniscript:docker-make-miniscript## 	docker-install-miniscript
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "install miniscript /usr/local/bin/ && which miniscript"
 .PHONY:docker-miniscript
-docker-miniscript:
-	rm miniscript || true
+docker-miniscript:## 	docker-miniscript
+	@[[ ! -z $(file miniscript | grep linux) ]] && echo TRUE
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript ##ls"
 
 ## docker run --rm --volume /Users/Shared/bitcoincore-dev/miniscript-templates/docker:/src miniscript sh -c 'rm -f ./miniscript || echo && make miniscript && install ./miniscript /usr/local/bin/ && which miniscript'
