@@ -33,10 +33,8 @@ static bool run(std::string&& line, int64_t count) {
 int main(void) {
     int64_t count = 0;
     do {
-        printf("start:test\n");
         std::string line;
         std::getline(std::cin, line);
-        printf("loop:test\n");
-        if (!run(std::move(line), count++)) { printf("end:test\n"); break; }
-	} while(true);
+        if (!run(std::move(line), count++)) break;
+    } while(true);
 }
