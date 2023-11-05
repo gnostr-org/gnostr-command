@@ -23,6 +23,8 @@ function help {
     printf "Examples:\n"
     printf "\n"
     printf "  miniscript-docker run \'thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))\'\n"
+    printf "  miniscript-docker run \'and_v(or_c(pk(B),or_c(pk(C),v:older(1000))),pk(A))'\n"
+    printf "  miniscript-docker run \'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))'\n"
     printf "\n"
 
     exit;
