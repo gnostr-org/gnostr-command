@@ -21,7 +21,7 @@ docker-install-miniscript:docker-make-miniscript## 	docker-install-miniscript
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "install miniscript /usr/local/bin/ && which miniscript"
 .PHONY:docker-miniscript
 docker-miniscript:## 		docker-miniscript
-	@[[ ! -z $(file miniscript | grep linux) ]] && echo TRUE
+	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript ##ls"
 
 ## docker run --rm --volume /Users/Shared/bitcoincore-dev/miniscript-templates/docker:/src miniscript sh -c 'rm -f ./miniscript || echo && make miniscript && install ./miniscript /usr/local/bin/ && which miniscript'
