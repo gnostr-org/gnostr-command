@@ -8,10 +8,11 @@ export PWD
 ## echo $(PWD)
 ## echo $(DOCKER)
 
-docker:docker-build docker-run## 	docker-build docker-run
-docker-build:## 	docker build -f Dockerfile -t miniscript .
+docker:docker-build docker-run## 	        docker-build docker-run
+	install $(PWD)/miniscript-docker /usr/local/bin/
+docker-build:## 		docker build -f Dockerfile -t miniscript .
 	$(DOCKER) build -f Dockerfile -t miniscript .
-docker-make-miniscript:## 	docker-make-miniscript
+docker-make-miniscript:## 		docker-make-miniscript
 ##if the miniscript binary doesnt include linux we rm ./miniscript
 	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
 	@$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
@@ -19,7 +20,7 @@ docker-make-miniscript:## 	docker-make-miniscript
 docker-install-miniscript:docker-make-miniscript## 	docker-install-miniscript
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "install miniscript /usr/local/bin/ && which miniscript"
 .PHONY:docker-miniscript
-docker-miniscript:## 	docker-miniscript
+docker-miniscript:## 		docker-miniscript
 	@[[ ! -z $(file miniscript | grep linux) ]] && echo TRUE
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript ##ls"
 
