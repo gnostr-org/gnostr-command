@@ -85,66 +85,37 @@ function miniscript_analyze() {
     <a href="reference.html">Reference</a>
 </h3>
 </div>
-
-</div>
-
-<div class="card-block">
-
-
-
 </div>
 
 <div class="card mb-3 text-left">
 <div class="card-block">
-
 <form>
-  <div class="form-group">
-      <h4><label for="source">Policy</label></h4>
-    <textarea class="form-control" id="source" rows="1">and(pk(A),or(pk(B),or(9@pk(C),older(1000))))</textarea>
-    <div class="small form-text test-muted">Supported policies:
-    Fill field with:
-    <ul>
-    <li><a class="demo_link" href='javascript:load_policy("pk(key_1)")'>A single key</a>
-    <li><a class="demo_link" href='javascript:load_policy("or(pk(key_1),pk(key_2))")'>One of two keys (equally likely)</a>
-    <li><a class="demo_link" href='javascript:load_policy("or(99@pk(key_likely),pk(key_unlikely))")'>One of two keys (one likely, one unlikely)</a>
-    <li><a class="demo_link" href='javascript:load_policy("and(pk(key_user),or(99@pk(key_service),older(12960)))")'>A user and a 2FA service need to sign off, but after 90 days the user alone is enough</a>
-    <li><a class="demo_link" href='javascript:load_policy("thresh(3,pk(key_1),pk(key_2),pk(key_3),older(12960))")'>A 3-of-3 that turns into a 2-of-3 after 90 days</a>
-    <li><a class="demo_link" href='javascript:load_policy("or(pk(key_revocation),and(pk(key_local),older(1008)))")'>The BOLT #3 to_local policy</a>
-    <li><a class="demo_link" href='javascript:load_policy("or(pk(key_revocation),and(pk(key_remote),or(pk(key_local),hash160(H))))")'>The BOLT #3 offered HTLC policy</a>
-    <li><a class="demo_link" href='javascript:load_policy("or(pk(key_revocation),and(pk(key_remote),or(and(pk(key_local),hash160(H)),older(1008))))")'>The BOLT #3 received HTLC policy</a>
-    </ul>
-  </div>
-  <button type="button" class="btn btn-primary" onclick="miniscript_compile();">Compile</button>
-  </div>
+<div class="form-group">
+<h4><label for="source">Policy</label></h4>
+<textarea class="form-control" id="source" rows="1">and(pk(A),or(pk(B),or(9@pk(C),older(1000))))</textarea><br>
+<button type="button" class="btn btn-primary" onclick="miniscript_compile();">Compile</button>
+</div>
 </form>
-</div>
 
-<div id="out"></div>
-
-</div>
-
-<div class="card text-left mb-3">
-<h3 class="card-header">Analyze a Miniscript</h3>
 <div class="card-block">
+<div id="out"></div>
+</div>
 
-<p>Here you can analyze the structure of a Miniscript expression and more.
+<div class="card-block">
 <form>
-  <div class="form-group">
-    <label for="analyze_ms">Miniscript</label>
-    <textarea class="form-control" id="analyze_ms" rows="1">and_v(v:pk(K),pk(A))</textarea>
-    <small class="form-text test-muted">Provide a well-typed miniscript expression of type "B".</small>
-  </div>
-  <button type="button" class="btn btn-primary" onclick="miniscript_analyze();">Analyze</button>
+    <div class="form-group">
+        <label for="analyze_ms"><b>Miniscript</b></label>
+        <textarea class="form-control" id="analyze_ms" rows="1">and_v(v:pk(K),pk(A))</textarea>
+        <small class="form-text test-muted">Provide a well-typed miniscript expression of type "B".</small>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="miniscript_analyze();">Analyze</button>
 </form>
-
+<div class="card-block">
+<div id="out"></div>
 <div id="analyze_out"></div>
-
 </div>
 </div>
-
-
-
-
-
+</div>
+</div>
 </body>
 </html>
