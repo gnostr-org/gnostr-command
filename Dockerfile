@@ -5,7 +5,7 @@ RUN echo $(date +%s) > updated
 RUN apt-get update
 RUN echo $(date +%s) > updated
 FROM base as systemd
-RUN apt-get install systemd -y
+RUN apt-get install systemd bash jq -y
 RUN echo $(date +%s) > updated
 RUN chmod +x /usr/bin/systemctl
 RUN echo $(date +%s) > updated
@@ -31,11 +31,12 @@ FROM make as install
 RUN install ./miniscript /usr/local/bin
 RUN echo $(date +%s) > updated
 RUN install ./miniscript-* /usr/local/bin
+RUN install ./serve /usr/local/bin
 RUN echo $(date +%s) > updated
 WORKDIR /src
 FROM install as miniscript
 COPY --from=clone /src /src
 ENV PATH=$PATH:/usr/bin/systemctl
 RUN ps -p 1 -o comm=
-EXPOSE 8080 8081
+EXPOSE 80 8080 8081
 VOLUME /src

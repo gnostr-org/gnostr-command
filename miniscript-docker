@@ -132,6 +132,8 @@ function help {
     printf "\n"
     printf "  miniscript-docker shell\n"
     printf "\n"
+    printf "  miniscript-docker serve\n"
+    printf "\n"
     printf "  miniscript-docker run '<miniscript>'"
     printf "\n"
     exit;
@@ -160,6 +162,19 @@ function run(){
 
 exit
 }
+function serve(){
+
+    docker-start
+
+    docker \
+        run \
+        -t \
+        -i \
+        --rm \
+        -p 127.0.0.1:$PORT:8080/tcp \
+        -v `pwd`:/src miniscript serve
+
+}
 function shell (){
 
     docker-start
@@ -170,6 +185,7 @@ function shell (){
         --rm \
         -p 127.0.0.1:$PORT:8080/tcp \
         -v `pwd`:/src miniscript bash
+
 }
 ## argparse
 ## position $1
@@ -210,6 +226,8 @@ do
         -m) make
             ;;
         run) RUN=TRUE && run $2 $3 $4
+            ;;
+        serve) serve
             ;;
         shell) shell
             ;;
