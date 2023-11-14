@@ -1,6 +1,6 @@
 #include <string>
 
-#include <script/miniscript.h>
+#include "./bitcoin/script/miniscript.h"
 
 #include "compiler.h"
 

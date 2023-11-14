@@ -16,9 +16,9 @@
 #include <assert.h>
 #include <cstdlib>
 
-#include <policy/policy.h>
-#include <primitives/transaction.h>
-#include <script/script.h>
+#include "../policy/policy.h"
+#include "../primitives/transaction.h"
+#include "../script/script.h"
 #include <span.h>
 #include <util/spanparsing.h>
 #include <util/strencodings.h>
