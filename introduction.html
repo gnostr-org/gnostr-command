@@ -79,13 +79,48 @@ function miniscript_analyze() {
 <div class="container" style="margin-top:50px">
 
 <div class="card mb-3 text-left">
-<h3 class="card-header">
-    <a href="index.html">Compiler</a>
-    <a href="introduction.html">Introduction</a>
-    <a href="reference.html">Reference</a>
-</h3>
+<h3 class="card-header"><a href="introduction.html">Introduction</a> </h3>
+<h3 class="card-header"><a href="reference.html">Reference</a> </h3>
 </div>
 
+</div>
+<div class="card-block">
+<p>
+<em>Miniscript</em> is a language for writing (a subset of) Bitcoin Scripts in a structured way, enabling analysis, composition, generic signing and more.
+
+<p>
+Bitcoin Script is an unusual stack-based language with many edge cases, designed for implementing spending conditions consisting of various combinations of
+signatures, hash locks, and time locks. Yet despite being limited in functionality it is still highly nontrivial to:<ul>
+<li>Given a combination of spending conditions, finding the most economical script to implement it.</li>
+<li>Given two scripts, construct a script that implements a composition of their spending conditions (e.g. a multisig where one of the "keys" is another multisig).</li>
+<li>Given a script, find out what spending conditions it permits.</li>
+<li>Given a script and access to a sufficient set of private keys, construct a general satisfying witness for it.</li>
+<li>Given a script, be able to predict the cost of spending an output.</li>
+<li>Given a script, know whether particular resource limitations like the ops limit might be hit when spending.</li>
+</ul>
+
+<p>
+Miniscript functions as a representation for scripts that makes these sort of operations possible. It has a structure that allows composition. It is very easy to 
+statically analyze for various properties (spending conditions, correctness, security properties, malleability, ...). It can be targeted by spending policy compilers
+(see below). Finally, compatible scripts can easily be converted to Miniscript form - avoiding the need for additional metadata for e.g. signing devices that support it.
+
+<p>
+Miniscript is designed for (P2SH-)P2WSH and Tapscript (as defined in BIP342) embedded scripts. Most of its constructions
+work fine in P2SH as well, but some of the (optional) security properties rely on Segwit-specific rules. Furthermore,
+the implemented policy compilers assume a Segwit-specific cost model.
+
+<p>
+Miniscript was designed and implemented by Pieter Wuille, Andrew Poelstra, and Sanket Kanjalkar at Blockstream Research, but is the result of discussions with several other people.
+
+<p>
+Links:<ul>
+<li>This <a href="http://bitcoin.sipa.be/miniscript">website</a> and C++ compiler: <a href="https://github.com/sipa/miniscript">[code]</a></li>
+<li>Bitcoin Core compatible C++ implementation: <a href="https://github.com/sipa/miniscript/tree/master/bitcoin/script">[code]</a></li>
+<li>Rust-miniscript implementation: <a href="https://github.com/apoelstra/rust-miniscript">[code]</a></li>
+<li>Talk about (an early version of) Miniscript at <a href="https://cyber.stanford.edu/sbc19">SBC'19</a>: <a href="https://www.youtube.com/watch?v=XM1lzN4Zfks">[video]</a> <a href="http://diyhpl.us/wiki/transcripts/stanford-blockchain-conference/2019/miniscript/">[transcript]</a> <a href="https://prezi.com/view/KH7AXjnse7glXNoqCxPH/">[slides]</a></li>
+</ul>
+
+</div>
 </div>
 
 <div class="card mb-3 text-left">
