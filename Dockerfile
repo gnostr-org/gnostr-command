@@ -16,10 +16,11 @@ FROM pandoc as docker
 RUN apt-get install docker.io -y
 RUN echo $(date +%s) > updated
 FROM docker as clone
-RUN git clone --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src/miniscript
+RUN rm -rf /src
+RUN git clone --branch v0.0.0 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
 RUN echo $(date +%s) > updated
 FROM clone as make
-WORKDIR /src/miniscript
+WORKDIR /src
 RUN make miniscript
 RUN echo $(date +%s) > updated
 RUN install miniscript /usr/local/bin
