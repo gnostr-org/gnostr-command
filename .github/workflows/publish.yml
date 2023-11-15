@@ -1,4 +1,5 @@
-name: publish to GHCR
+name: publish to ghcr.io
+##REF:https://github.com/docker/login-action
 
 env:
   DOTNET_VERSION: '6.0.x'
