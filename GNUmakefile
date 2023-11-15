@@ -17,6 +17,7 @@ install:
 
 docker:docker-miniscript## 	        docker-build
 docker-build:## 		docker build -f Dockerfile -t miniscript .
+	@./miniscript-docker start
 	@$(DOCKER) pull ghcr.io/bitcoincore-dev/miniscript-docker:latest
 	@$(DOCKER) build -f Dockerfile -t miniscript .
 docker-miniscript:docker-build## 		docker-miniscript
