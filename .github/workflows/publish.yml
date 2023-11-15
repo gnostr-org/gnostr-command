@@ -2,7 +2,17 @@ name: publish to ghcr.io
 ##REF:https://github.com/docker/login-action
 
 env:
-  DOTNET_VERSION: '6.0.x'
+  MINISCRIPT_DOCKER: 'miniscript-docker'
+  MINT_000_0: ''
+  MINT_000_1: ''
+  MINT_001_0: ''
+  MINT_001_1: ''
+  MINT_002_0: ''
+  MINT_002_1: ''
+  MINT_003_0: ''
+  MINT_003_1: ''
+  MINT_004_0: 'pk_h(mint004)'
+  MINT_004_1: 'pk_h(mint004)'
 
 on:
   push:
