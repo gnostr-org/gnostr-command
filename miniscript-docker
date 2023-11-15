@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-#rm -rf /usr/local/bin/miniscript-docker 2>/dev/null || true
 [[ -z "$(command -v miniscript-docker)" ]] && \
         install $0 /usr/local/bin || true
 
-VERSION=${VERSION:-v0.0.2}
-
-PORT=${PORT:-80}
+PORT=${PORT:-8080}
 VERBOSE=${VERBOSE:-	}
 
 FORCE=${FORCE:-	}
@@ -15,16 +12,30 @@ TAG=${TAG:-miniscript}
 
 PYTHON3=$(which python3)
 
-if [[ "$(uname -s)" == "Darwin"  ]];
+if [[ "$CI" == "" ]];
 then
-    DOCKER=${DOCKER:-"/Applications/Docker.app/Contents/MacOS/Docker"}
+    if [[ "$(uname -s)" == "Darwin"  ]];
+    then
+        DOCKER=${DOCKER:-"/Applications/Docker.app/Contents/MacOS/Docker"}
+    fi
+    if [[ "$(uname -s)" == "Linux"  ]];
+    then
+        echo "TODO:more Linux support"
+        DOCKER=docker
+        DOCKER=${DOCKER:-docker}
+    fi
 fi
-## echo $DOCKER; ##exit
-## [[ -z "$DOCKER" ]] && echo "????" && DOCKER=${DOCKER:docker}
+#[[ -z "$DOCKER" ]] && echo "-z $DOCKER" && DOCKER=${DOCKER:docker}
+#[[ ! -z "$DOCKER" ]] && echo "! -z $DOCKER" && DOCKER=${DOCKER:docker}
+#echo $DOCKER;
 
 ## MINT_000
 
 ## MINT_001
+MINT_001_1="thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))"
+MINT_001_2="thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:after(2477600))"
+MINT_001_3="thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:after(1694563200))"
+MINT_001_4="thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(4194400))"
 
 ## MINT_002
 MINT_002_1="thresh(3,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),s:pk(XPUB4),s:pk(XPUB5),snu:older(100),snu:older(200))"
@@ -49,7 +60,7 @@ function docker-start(){
 	    fi;\
 	    if [[ "$(uname -s)" == "Darwin" ]]; then\
             DOCKER="/Applications/Docker.app/Contents/MacOS/Docker";\
-	     open --background -a $DOCKER;\
+            open --background -a $DOCKER || DOCKER=$(which docker);\
 	    fi;\
 	sleep 1;\
 	done\
@@ -72,6 +83,19 @@ and(pk(A),or(pk(B),or(9@pk(C),older(1000))))
 "
 printf "
 and(pk(A),or(pk(B),or(9@pk(C),older(1000))))
+"
+
+printf "
+$MINT_001_1
+"
+printf "
+$MINT_001_2
+"
+printf "
+$MINT_001_3
+"
+printf "
+$MINT_001_4
 "
 printf "
 $MINT_002_1
@@ -103,7 +127,12 @@ function help {
     printf "  miniscript-docker examples\n"
     printf "\n"
     printf "  miniscript-docker help  [-h --help]\n"
+    printf "\n"
     printf "  miniscript-docker build [-b --build]\n"
+    printf "\n"
+    printf "  miniscript-docker shell\n"
+    printf "\n"
+    printf "  PORT=6102 miniscript-docker serve\n"
     printf "\n"
     printf "  miniscript-docker run '<miniscript>'"
     printf "\n"
@@ -112,32 +141,17 @@ function help {
 
 function build(){
 
-    docker \
-        build \
-        https://raw.githubusercontent.com/bitcoincore-dev/miniscript-docker/$VERSION/Dockerfile \
-        $NOCACHE \
-        -t $TAG
-
     #echo $DOCKER
     #echo $NOCACHE
-    #[ "$NOCACHE" ]      && $(which docker) build --no-cache -t $TAG . && exit;
-    #[ ! -z "$NOCACHE" ] && $(which docker) build $NOCACHE   -t $TAG . && exit;
+    [ "$NOCACHE" ]      && docker build --no-cache -t $TAG . && exit;
+    [ ! -z "$NOCACHE" ] && docker build $NOCACHE   -t $TAG . && exit;
 
 }
 
 function run(){
 
     docker-start
-    echo $2
-    docker \
-        run \
-        --rm \
-        -v $PWD:/src \
-        $TAG \
-        sh \
-        -c "echo '$2' | ./miniscript-run"; exit;
 
-    ## echo $1
     docker \
         run \
         --rm \
@@ -145,7 +159,23 @@ function run(){
         $TAG \
         sh \
         -c "echo '$1' | miniscript";
-    echo $2
+
+exit
+}
+function serve(){
+    echo serve
+    echo $PORT
+
+    docker-start
+
+    docker \
+        run \
+        -d \
+        -t \
+        -i \
+        -p 127.0.0.1:$PORT:8080/tcp \
+        -v `pwd`:/src miniscript bash -c "serve $PORT"
+    exit
 
 }
 function shell (){
@@ -153,11 +183,13 @@ function shell (){
     docker-start
     docker \
         run \
+        -d \
         -t \
         -i \
         --rm \
         -p 127.0.0.1:$PORT:8080/tcp \
         -v `pwd`:/src miniscript bash
+
 }
 ## argparse
 ## position $1
@@ -198,6 +230,8 @@ do
         -m) make
             ;;
         run) RUN=TRUE && run $2 $3 $4
+            ;;
+        serve) serve $PORT
             ;;
         shell) shell
             ;;

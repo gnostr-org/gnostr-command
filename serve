@@ -21,4 +21,4 @@ function serve() {
 }
 
 port="${1:-8080}";
-npx http-server -p $port -o 2>/tmp/serve.log || serve 2>/tmp/serve.log || echo "install npx or python@2.7"
+npx -y http-server -p $port #-o 2>/tmp/serve.log || echo "install npx"
