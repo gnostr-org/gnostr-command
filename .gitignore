@@ -1,2 +1,13 @@
 miniscript
+
+#make
+miniscript.js
+miniscript.wasm
+
+#serve
+favicon.ico
+apple-touch-icon-precomposed.png
+apple-touch-icon.png
+
+#macos
 **.DS_Store**
