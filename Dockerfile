@@ -1,5 +1,6 @@
 FROM emscripten/emsdk:latest as base
 LABEL org.opencontainers.image.source="https://github.com/bitcoincore-dev/miniscript-docker"
+LABEL org.opencontainers.image.description="miniscript compiler"
 RUN touch updated
 RUN echo $(date +%s) > updated
 RUN apt-get update
