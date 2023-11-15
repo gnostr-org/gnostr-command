@@ -46,6 +46,13 @@ docker pull ghcr.io/bitcoincore-dev/miniscript-docker:latest
 
 ![miniscript-docker-examples](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/a9b7e0d6-bcdf-4e86-abe7-0af4dd3b887e)
 
+
+##### miniscript-docker serve
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bitcoincore-dev/miniscript-docker/master/miniscript-docker)" - serve
+```
+
 <hr>
 
 Go to [the Miniscript website](http://bitcoin.sipa.be/miniscript/).
