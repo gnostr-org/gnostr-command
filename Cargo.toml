@@ -8,17 +8,20 @@ authors = [
   "Timo Tiuraniemi <timo.tiuraniemi@iki.fi>",
   "gnostr <gnostr>"
 ]
+keywords = ["gnostr","nostr", "git"]
 documentation = "https://docs.rs/hypercore-protocol"
 repository = "https://github.com/gnostr-org/gnostrcore-protocol-rs"
 readme = "README.md"
 edition = "2021"
-keywords = ["dat", "p2p", "replication", "hypercore", "protocol"]
+keywords = ["dat", "p2p", "replication", "hypercore", "protocol", "gnostr","nostr", "git"]
 categories = [
   "asynchronous",
   "concurrency",
   "cryptography",
   "data-structures",
   "encoding",
+  "commanod-line",
+  "git"
 ]
 
 [lib]
