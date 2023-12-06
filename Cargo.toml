@@ -1,6 +1,6 @@
 [package]
 name = "gnostr-command"
-version = "0.0.0"
+version = "0.0.4"
 license = "MIT OR Apache-2.0"
 description = "gnostr-command"
 authors = [
@@ -54,8 +54,6 @@ crypto_secretstream = "0.2"
 rust-crypto = "0.2.36"
 git2        = "0.9.1"
 argparse    = "0.2.2"
-#rust-crypto = "0.2.36"
-#git2        = "0.9.1"
 time = "0.1.42"
 chrono = "0"
 nostr = "0.24.0"

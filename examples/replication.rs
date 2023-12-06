@@ -17,8 +17,8 @@ use std::convert::TryInto;
 use std::env;
 use std::fmt::Debug;
 
-use hypercore_protocol::schema::*;
-use hypercore_protocol::{discovery_key, Channel, Event, Message, ProtocolBuilder};
+use gnostr_command::schema::*;
+use gnostr_command::{discovery_key, Channel, Event, Message, ProtocolBuilder};
 
 fn main() {
     init_logger();

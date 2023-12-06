@@ -4,8 +4,8 @@ use async_std::net::TcpStream;
 use async_std::prelude::*;
 use async_std::task;
 use futures_lite::io::{AsyncRead, AsyncWrite};
-use hypercore_protocol::{discovery_key, Channel, Event, Message, Protocol, ProtocolBuilder};
-use hypercore_protocol::{schema::*, DiscoveryKey};
+use gnostr_command::{discovery_key, Channel, Event, Message, Protocol, ProtocolBuilder};
+use gnostr_command::{schema::*, DiscoveryKey};
 use std::io;
 use test_log::test;
 

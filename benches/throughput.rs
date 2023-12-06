@@ -4,8 +4,8 @@ use criterion::{criterion_group, criterion_main, Criterion, Throughput};
 use futures::future::Either;
 use futures::io::{AsyncRead, AsyncWrite};
 use futures::stream::{FuturesUnordered, StreamExt};
-use hypercore_protocol::{schema::*, Duplex};
-use hypercore_protocol::{Channel, Event, Message, ProtocolBuilder};
+use gnostr_command::{schema::*, Duplex};
+use gnostr_command::{Channel, Event, Message, ProtocolBuilder};
 use log::*;
 use std::time::Instant;
 

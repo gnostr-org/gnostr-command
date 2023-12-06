@@ -50,8 +50,8 @@
 //!
 //! ```no_run
 //! # async_std::task::block_on(async {
-//! use hypercore_protocol::{ProtocolBuilder, Event, Message};
-//! use hypercore_protocol::schema::*;
+//! use gnostr_command::{ProtocolBuilder, Event, Message};
+//! use gnostr_command::schema::*;
 //! use async_std::prelude::*;
 //! // Start a tcp server.
 //! let listener = async_std::net::TcpListener::bind("localhost:8000").await.unwrap();
@@ -144,21 +144,24 @@ pub use protocol::{Command, CommandTx, DiscoveryKey, Event, Key, Protocol};
 pub use util::discovery_key;
 use std::process;
 use std::fs;
-use std::env;
+
 use std::process::Command as CMD;
-use std::{io};
+
 //use std::io::{Result};
 use crate::process::Output;
 
 #[derive(Debug)]
 /// pub struct Config
 pub struct Config {
+    /// pub query: String,
     pub query: String,
+    /// pub file_path: String,
     pub file_path: String,
 }
 /// impl Config
 impl Config {
 
+/// pub fn get_path() -> Result<String, &'static str>
   pub fn get_path() -> Result<String, &'static str> {
 
     let path : Output  =
@@ -198,7 +201,7 @@ impl Config {
 
   }
 
-
+/// pub fn build(args: &[String]) -> Result<Config, &'static str>
     pub fn build(args: &[String]) -> Result<Config, &'static str> {
 
       //#[cfg(debug_assertions)]
@@ -412,7 +415,6 @@ Rust:
 safe, fast, productive.
 Pick three.";
 
-        /// assert_eq!(vec!["safe, fast, productive."], search(query, contents));
         assert_eq!(vec!["safe, fast, productive."], search(query, contents));
     }
 }

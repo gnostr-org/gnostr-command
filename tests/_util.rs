@@ -2,7 +2,7 @@ use async_std::net::TcpStream;
 use async_std::prelude::*;
 use async_std::task::{self, JoinHandle};
 use futures_lite::io::{AsyncRead, AsyncWrite};
-use hypercore_protocol::{Channel, DiscoveryKey, Duplex, Event, Protocol, ProtocolBuilder};
+use gnostr_command::{Channel, DiscoveryKey, Duplex, Event, Protocol, ProtocolBuilder};
 use instant::Duration;
 use std::io;
 

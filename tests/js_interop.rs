@@ -37,8 +37,8 @@ use tokio::{
     time::sleep,
 };
 
-use hypercore_protocol::schema::*;
-use hypercore_protocol::{discovery_key, Channel, Event, Message, ProtocolBuilder};
+use gnostr_command::schema::*;
+use gnostr_command::{discovery_key, Channel, Event, Message, ProtocolBuilder};
 
 pub mod _util;
 mod js;
