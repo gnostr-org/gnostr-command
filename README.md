@@ -1,3 +1,7 @@
+## gnostr-command
+<details>
+<summary>👀</summary>
+<p>
 # Hypercore Protocol
 [![crates.io version][1]][2] [![build status][3]][4]
 [![downloads][5]][6] [![docs.rs docs][7]][8]
@@ -106,3 +110,6 @@ and take a look at the open [issues](https://github.com/datrs/hypercore-protocol
 [6]: https://crates.io/crates/hypercore-protocol
 [7]: https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square
 [8]: https://docs.rs/hypercore-protocol
+
+</p>
+</details>
