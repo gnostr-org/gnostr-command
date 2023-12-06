@@ -116,7 +116,7 @@
 #![forbid(unsafe_code, future_incompatible, rust_2018_idioms)]
 #![deny(missing_debug_implementations, nonstandard_style)]
 #![warn(missing_docs, unreachable_pub)]
-
+use std::error::Error;
 mod builder;
 mod channels;
 mod constants;
@@ -142,51 +142,15 @@ pub use hypercore; // Re-export hypercore
 pub use message::Message;
 pub use protocol::{Command, CommandTx, DiscoveryKey, Event, Key, Protocol};
 pub use util::discovery_key;
-use std::error::Error;
 use std::process;
-use std::process::Command;
 use std::fs;
-
-#[derive(Debug)]
+use std::env;
+use std::process::Command as CMD;
+use std::{io};
+//use std::io::{Result};
 use crate::process::Output;
 
-    static repo_root : String = std::env::args().nth(1).unwrap_or(".".to_string());
-    const repo_path : Output  =
-        if cfg!(target_os = "windows") {
-        Command::new("cmd")
-                .args(["/C", "cd"])
-                .output()
-                .expect("failed to execute process")
-        } else
-        if cfg!(target_os = "macos"){
-        Command::new("sh")
-                .arg("-c")
-                .arg("pwd")
-                .output()
-                .expect("failed to execute process")
-        } else
-        if cfg!(target_os = "linux"){
-        Command::new("sh")
-                .arg("-c")
-                .arg("pwd")
-                .output()
-                .expect("failed to execute process")
-        } else {
-        Command::new("sh")
-                .arg("-c")
-                .arg("pwd")
-                .output()
-                .expect("failed to execute process")
-        };
-
-    static path : String = String::from_utf8(repo_path.stdout)
-    .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
-    .unwrap();
-    //println!("path={:?}", path);
-
-
-
-
+#[derive(Debug)]
 /// pub struct Config
 pub struct Config {
     pub query: String,
@@ -194,6 +158,46 @@ pub struct Config {
 }
 /// impl Config
 impl Config {
+
+  pub fn get_path() -> Result<String, &'static str> {
+
+    let path : Output  =
+        if cfg!(target_os = "windows") {
+        CMD::new("cmd")
+                .args(["/C", "cd"])
+                .output()
+                .expect("failed to execute process")
+        } else
+        if cfg!(target_os = "macos"){
+        CMD::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        } else
+        if cfg!(target_os = "linux"){
+        CMD::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        } else {
+        CMD::new("sh")
+                .arg("-c")
+                .arg("pwd")
+                .output()
+                .expect("failed to execute process")
+        };
+
+    let repo_path = String::from_utf8(path.stdout)
+    .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
+    .unwrap();
+    //println!("path={:?}", path);
+
+    Ok(repo_path)
+
+  }
+
 
     pub fn build(args: &[String]) -> Result<Config, &'static str> {
 
@@ -327,13 +331,13 @@ impl Config {
 
           // intercept return if
           // gnostr-comand install gnostr-*
-          Ok(Config { query, file_path })
+          Ok(Config { query, file_path})
 
       } else {
 
         let query = args[1].clone();
         let file_path = args[2].clone();
-        Ok(Config { query, file_path })
+        Ok(Config { query, file_path})
 
       }
 
