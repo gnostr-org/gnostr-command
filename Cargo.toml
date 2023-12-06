@@ -1,14 +1,16 @@
 [package]
-name = "hypercore-protocol"
-version = "0.4.2-alpha.1"
+name = "gnostr-command"
+version = "0.0.0"
+edition = "2018"
 license = "MIT OR Apache-2.0"
-description = "Replication protocol for Hypercore feeds"
+description = "gnostr-command"
 authors = [
   "Franz Heinzmann (Frando) <frando@unbiskant.org>",
-  "Timo Tiuraniemi <timo.tiuraniemi@iki.fi>"
+  "Timo Tiuraniemi <timo.tiuraniemi@iki.fi>",
+  "gnostr <gnostr>"
 ]
 documentation = "https://docs.rs/hypercore-protocol"
-repository = "https://github.com/datrs/hypercore-protocol-rs"
+repository = "https://github.com/gnostr-org/gnostrcore-protocol-rs"
 readme = "README.md"
 edition = "2021"
 keywords = ["dat", "p2p", "replication", "hypercore", "protocol"]
