@@ -1,4 +1,5 @@
-## gnostr-command
+## gnostr-command template
+
 <details>
 <summary>👀</summary>
 <p>
