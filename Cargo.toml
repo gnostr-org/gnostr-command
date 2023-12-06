@@ -8,9 +8,9 @@ authors = [
   "Timo Tiuraniemi <timo.tiuraniemi@iki.fi>",
   "gnostr <gnostr>"
 ]
-keywords = ["gnostr","nostr", "git"]
 documentation = "https://docs.rs/hypercore-protocol"
-repository = "https://github.com/gnostr-org/gnostrcore-protocol-rs"
+homepage = "https://github.com/gnostr-org/gnostr-command"
+repository = "https://github.com/gnostr-org/gnostr-command"
 readme = "README.md"
 edition = "2021"
 keywords = ["dat", "p2p", "replication", "hypercore", "protocol", "gnostr","nostr", "git"]
@@ -51,9 +51,8 @@ argparse    = "0.2.2"
 #git2        = "0.9.1"
 time = "0.1.42"
 chrono = "0"
-#io = "0.0.2"
-#use = "0.0.0"
-#crypto      = "0.4.0"
+nostr = "0.24.0"
+nostr-sdk = "0.24.0"
 
 [dev-dependencies]
 async-std = { version = "1.12.0", features = ["attributes", "unstable"] }
