@@ -391,7 +391,7 @@ where
                     println!();
                     println!("### Results");
                     println!();
-                    println!("Replication succeeded if this prints '0: hi', '1: ola', '2: hello', '3: mundo', '4: <key>':");
+                    println!("Replication succeeded if this prints '0: hi', '1: ola', '2: hello', '3: mundo', '4: key':");
                     println!();
                     for i in 0..new_info.contiguous_length {
                         println!(
