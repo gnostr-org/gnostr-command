@@ -1,0 +1,10 @@
+
+test from_entropy ... bench:         758 ns/iter (+/- 74)
+test new_mnemonic ... bench:         833 ns/iter (+/- 92)
+test to_seed      ... bench:   1,840,653 ns/iter (+/- 156,043)
+test validate     ... bench:      76,772 ns/iter (+/- 4,309)
+
+test from_entropy ... bench:         618 ns/iter (+/- 26)
+test new_mnemonic ... bench:         676 ns/iter (+/- 101)
+test to_seed      ... bench:   1,860,099 ns/iter (+/- 61,867)
+test validate     ... bench:      69,667 ns/iter (+/- 6,448)
