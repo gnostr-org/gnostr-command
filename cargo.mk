@@ -49,5 +49,18 @@ cargo-doc:### 	cargo-doc
 cargo-b-wasm-tokio:
 	@. $(HOME)/.cargo/env && cargo clean && cargo build --target=wasm32-unknown-emscripten --no-default-features #--features wasm-bindgen,tokio
 
+node-examples-nodejs-run-js-node:### 	node-examples-nodejs-run-js-node
+## 	node-examples-nodejs-run-js-node
+	node examples-nodejs/run.js node
+node-examples-nodejs-run-js-node-6102:### 	node-examples-nodejs-run-js-node-6102
+## 	node-examples-nodejs-run-js-node-6102
+	node examples-nodejs/run.js node 6102
+node-examples-nodejs-run-js-rust:### 	node-examples-nodejs-run-js-rust
+## 	node-examples-nodejs-run-js-rust
+	node examples-nodejs/run.js rust
+node-examples-nodejs-run-js-rust-2106:### 	node-examples-nodejs-run-js-rust-2106
+## 	node-examples-nodejs-run-js-rust-2106
+	node examples-nodejs/run.js rust 2106
+
 # vim: set noexpandtab:
 # vim: set setfiletype make

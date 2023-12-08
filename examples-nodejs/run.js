@@ -3,11 +3,11 @@ const p = require('path')
 const chalk = require('chalk')
 const split = require('split2')
 
-const PORT = 8000
-
 const EXAMPLE_NODE = p.join(__dirname, 'replicate.js')
 const EXAMPLE_RUST = 'replication'
 const MODE = process.argv[2]
+const PORT = process.argv[3] || 8000
+
 if (!MODE) {
   usage()
 }

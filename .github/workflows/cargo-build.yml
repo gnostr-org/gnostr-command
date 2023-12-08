@@ -1,4 +1,4 @@
-name: ubuntu-matrix
+name: cargo-build-matrix
 
 # Controls when the action will run.
 on:
