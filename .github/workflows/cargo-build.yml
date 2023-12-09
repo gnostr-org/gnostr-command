@@ -81,10 +81,28 @@ jobs:
         run: |
           make cargo-build-release-async-std
 
-
-
       - name: Run tests
         run: source "$HOME/.cargo/env" && cargo test --verbose
+
+      - name: make cargo-t
+        run: |
+          make cargo-t
+
+      - name: make cargo-test-tokio
+        run: |
+          make cargo-test-tokio
+
+      - name: make cargo-test-js-interop-tokio
+        run: |
+          make cargo-test-js-interop-tokio
+
+      - name: make cargo-test-async-std
+        run: |
+          make cargo-test-async-std
+
+      - name: make cargo-test-js-interop-async-std
+        run: |
+          make cargo-test-js-interop-async-std
 
       - name: Save build/ext
         id: cache-ext-save
