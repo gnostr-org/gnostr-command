@@ -61,13 +61,27 @@ jobs:
           #make autoconf automake \
           #libtool gettext util-linux bash cmake clang
 
-      - name: cargo-br-tokio
+      - name: cargo-c
         run: |
-          make cargo-br-tokio
+          make cargo-c
 
-      - name: cargo-br-async-std
+      - name: cargo-b
         run: |
-          make cargo-br-async-std
+          make cargo-b
+
+      - name: cargo-b-release
+        run: |
+          make cargo-b-release
+
+      - name: cargo-build-release-tokio
+        run: |
+          make cargo-build-release-tokio
+
+      - name: cargo-build-release-async-std
+        run: |
+          make cargo-build-release-async-std
+
+
 
       - name: Run tests
         run: source "$HOME/.cargo/env" && cargo test --verbose
