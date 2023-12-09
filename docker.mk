@@ -31,3 +31,8 @@ docker-buildx:## 	docker buildx build sequence
 	@$(DOCKER) buildx create --use --name gnostr-command-buildx || true
 	@$(DOCKER) buildx build -t gnostr-command --platform linux/arm64,linux/amd64 .
 	@$(DOCKER) buildx build -t gnostr-command --platform linux/$(TARGET) . --load
+
+docker-package-buildx:
+	@docker build . --tag ghcr.io/gnostr-org/gnostr-command:latest
+docker-package-pushx:
+	@$(DOCKER) push ghcr.io/gnostr-org/gnostr-command:latest
