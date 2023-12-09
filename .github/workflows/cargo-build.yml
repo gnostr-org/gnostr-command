@@ -48,9 +48,12 @@ jobs:
       - name: printenv
         run: |
           printenv
+          touch ~/GITHUB_TOKEN.txt
+
       - name: install rustup
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source "$HOME/.cargo/env"
-      - name: make
+
+      - name: sudo apt-get install -y make
         run: |
           printenv && sudo apt-get update && \
           sudo apt-get install -y make #\
@@ -58,17 +61,14 @@ jobs:
           #make autoconf automake \
           #libtool gettext util-linux bash cmake clang
 
-      - name: cmake -S . -B build && cd build && make
+      - name: cargo-br-tokio
         run: |
-           touch ~/GITHUB_TOKEN.txt
-          #touch CMakeCache.txt
-          #mkdir -p build
-          #rm CMakeCache.txt || true
-          #rm build/CMakeCache.txt || true
-          #CMAKE_CXX_COMPILER=clang cmake -S . -B build && cd build && make
+          make cargo-br-tokio
 
-      - name: Build
-        run: source "$HOME/.cargo/env" && cargo build --verbose
+      - name: cargo-br-async-std
+        run: |
+          make cargo-br-async-std
+
       - name: Run tests
         run: source "$HOME/.cargo/env" && cargo test --verbose
 
