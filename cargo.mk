@@ -95,18 +95,18 @@ cargo-b-wasm-async-std:
 	@rustup target add wasm32-unknown-emscripten
 	@. $(HOME)/.cargo/env && cargo clean && cargo build --target=wasm32-unknown-emscripten --no-default-features --features wasm-bindgen,async-std
 
-node-examples-nodejs-run-js-node:### 	node-examples-nodejs-run-js-node
-## 	node-examples-nodejs-run-js-node
-	node examples-nodejs/run.js node
-node-examples-nodejs-run-js-node-6102:### 	node-examples-nodejs-run-js-node-6102
-## 	node-examples-nodejs-run-js-node-6102
-	node examples-nodejs/run.js node 6102
-node-examples-nodejs-run-js-rust:### 	node-examples-nodejs-run-js-rust
-## 	node-examples-nodejs-run-js-rust
-	node examples-nodejs/run.js rust
-node-examples-nodejs-run-js-rust-2106:### 	node-examples-nodejs-run-js-rust-2106
-## 	node-examples-nodejs-run-js-rust-2106
-	node examples-nodejs/run.js rust 2106
+node-sdk-run-js-node:### 	node-sdk-run-js-node
+## 	node-sdk-run-js-node
+	node sdk/run.js node
+node-sdk-run-js-node-6102:### 	node-sdk-run-js-node-6102
+## 	node-sdk-run-js-node-6102
+	node sdk/run.js node 6102
+node-sdk-run-js-rust:### 	node-sdk-run-js-rust
+## 	node-sdk-run-js-rust
+	node sdk/run.js rust
+node-sdk-run-js-rust-2106:### 	node-sdk-run-js-rust-2106
+## 	node-sdk-run-js-rust-2106
+	node sdk/run.js rust 2106
 
 # vim: set noexpandtab:
 # vim: set setfiletype make

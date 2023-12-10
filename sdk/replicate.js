@@ -12,7 +12,7 @@ hypercore.info().then((_info) => {
   console.log('KEY=' + hypercore.key.toString('hex'))
   console.log()
   if (hypercore.writable && !key) {
-    hypercore.append(['hi\n', 'ola\n', 'hello\n', 'mundo\n'])
+    hypercore.append(['hi\n', 'ola\n', 'hello\n', 'mundo\n', hypercore.key.toString('hex')])
   }
 })
 
@@ -58,7 +58,7 @@ function onconnection (opts) {
       console.log("");
       console.log("### Results (Press Ctrl-C to exit)");
       console.log("");
-      console.log("Replication succeeded if you see '0: hi', '1: ola', '2: hello' and '3: mundo' (not necessarily in that order)")
+      console.log("Replication succeeded if you see '0: hi', '1: ola', '2: hello', '3: mundo', '4: key', (not necessarily in that order)")
       console.log("");
       for (let i = 0; i < hypercore.length; i++) {
           hypercore.get(i).then(value => {
