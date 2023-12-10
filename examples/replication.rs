@@ -38,8 +38,11 @@ fn main() {
     });
 
     task::block_on(async move {
+
         let mut hypercore_store: HypercoreStore<RandomAccessMemory> = HypercoreStore::new();
+
         let storage = Storage::new_memory().await.unwrap();
+
         // Create a hypercore.
         let hypercore = if let Some(key) = key {
             let public_key = VerifyingKey::from_bytes(&key).unwrap();
@@ -53,7 +56,7 @@ fn main() {
                 .unwrap()
         } else {
             let mut hypercore = HypercoreBuilder::new(storage).build().await.unwrap();
-            let batch: &[&[u8]] = &[b"hi\n", b"ola\n", b"hello\n", b"mundo\n"];
+            let batch: &[&[u8]] = &[b"hi\n", b"ola\n", b"hello\n", b"mundo\n", b"key\n"];
             hypercore.append_batch(batch).await.unwrap();
             hypercore
         };
@@ -78,7 +81,7 @@ fn main() {
 
 /// Print usage and exit.
 fn usage() {
-    println!("usage: cargo run --example hypercore -- [client|server] [port] [key]");
+    println!("usage: cargo run --example replication -- [client|server] [port] [key]");
     std::process::exit(1);
 }
 
@@ -388,7 +391,7 @@ where
                     println!();
                     println!("### Results");
                     println!();
-                    println!("Replication succeeded if this prints '0: hi', '1: ola', '2: hello' and '3: mundo':");
+                    println!("Replication succeeded if this prints '0: hi', '1: ola', '2: hello', '3: mundo', '4: key':");
                     println!();
                     for i in 0..new_info.contiguous_length {
                         println!(
