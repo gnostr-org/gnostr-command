@@ -1341,6 +1341,7 @@ dependencies = [
  "log",
  "nostr",
  "nostr-sdk",
+ "oorandom",
  "pretty-bytes",
  "pretty-hash",
  "rand 0.8.5",
@@ -1356,6 +1357,7 @@ dependencies = [
  "tokio",
  "tracing",
  "tracing-subscriber",
+ "wasi 0.10.0+wasi-snapshot-preview1",
 ]
 
 [[package]]
