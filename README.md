@@ -1,5 +1,11 @@
-## gnostr-command template
+## gnostr-command
 
+### gnostr: a git+nostr workflow utility
+
+I. [BYZANTINE QUORUM SYSTEMS](./BQS97/BQS97.pdf)
+
+
+---
 
 ### make
 
