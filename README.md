@@ -1,5 +1,48 @@
 ## gnostr-command template
 
+
+### make
+
+```
+help            	help
+rustup-install  	rustup-install
+rustup-install-stable 	rustup-install-stable
+rustup-install-nightly 	rustup-install-nightly
+cargo-b         	cargo-b
+cargo-b-release 	cargo-b-release
+cargo-c         	cargo-c
+install         	install
+cargo-i         	cargo-i
+cargo-help      	cargo-help
+cargo-bt        	cargo-bt
+cargo-build-tokio 	cargo-build-tokio
+cargo-bas       	cargo-bas
+cargo-build-async-std 	cargo-build-async-std
+cargo-install   	cargo install --path .
+cargo-br-tokio  	cargo-br-tokio
+cargo-build-release-tokio 	cargo-build-release-tokio
+cargo-br-async-std 	cargo-br-async-std
+cargo-build-release-async-std 	cargo-build-release-async-std
+cargo-check     	cargo-check
+cargo-check-tokio 	cargo-check-tokio
+cargo-check-async-std 	cargo-check-async-std
+cargo-bench     	cargo-bench
+cargo-tt        	cargo-tt
+cargo-test-tokio 	cargo-test-tokio
+cargo-ts        	cargo-ts
+cargo-test-async-std 	cargo-test-async-std
+cargo-jits      	cargo-jits
+cargo-t-jit-tokio 	cargo-test-jit-tokio
+cargo-t-jit-as  	cargo-test-jit-as
+cargo-test-benches 	cargo-test-benches
+cargo-report    	cargo-report
+cargo-doc       	cargo-doc
+node-sdk-run-js-node 	node-sdk-run-js-node
+node-sdk-run-js-rust 	node-sdk-run-js-rust
+dockerx         	docker-buildx
+docker-build    	ocker build -f Dockerfile -t gnostr-command .
+docker-buildx   	docker buildx build sequence
+```
 <details>
 <summary>👀</summary>
 <p>
