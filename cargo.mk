@@ -56,6 +56,31 @@ cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench
 
+cargo-examples:### 	cargo-examples
+## cargo b --examples
+	@. $(HOME)/.cargo/env
+	@cargo b --examples
+
+cargo-example-disk:### 	cargo-example-disk
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example disk
+
+cargo-example-memory:### 	cargo-example-memory
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example memory
+
+cargo-example-template:### 	cargo-example-template
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example template
+
+cargo-example-replication:### 	cargo-example-replication
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	cargo run --example replication
+
 cargo-t-tok:cargo-test-tokio
 cargo-test-tokio:
 ## cargo-t-tok
