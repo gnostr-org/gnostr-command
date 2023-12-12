@@ -60,6 +60,7 @@ nostr = "0.24.0"
 nostr-sdk = "0.24.0"
 wasi = { version = "0.10.0", features = ["std"] }
 oorandom = "11.1.3"
+
 ##$ cargo add random-access-disk
 ##    Updating crates.io index
 ##      Adding random-access-disk v3.0.0 to dependencies.
@@ -70,16 +71,15 @@ oorandom = "11.1.3"
 ##             - tokio
 ## NOTE:We favor async-std in this build config
 
-random-access-disk = "3.0.0"
+random-access-storage = "5.0.0"
+random-access-disk = { version = "3.0.0", default-features = false }
+random-access-memory = "3.0.0"
 
 [dev-dependencies]
 async-std = { version = "1.12.0", features = ["attributes", "unstable"] }
 async-compat = "0.2.1"
 tokio = { version = "1.27.0", features = ["macros", "net", "process", "rt", "rt-multi-thread", "sync", "time"] }
 env_logger = "0.7.1"
-random-access-storage = "5.0.0"
-random-access-disk = { version = "3.0.0", default-features = false }
-random-access-memory = "3.0.0"
 anyhow = "1.0.28"
 instant = "0.1"
 criterion = { version = "0.4", features = ["async_std"] }
