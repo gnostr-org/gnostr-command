@@ -20,10 +20,10 @@ cargo-install:### 	cargo install --path .
 	#@cargo install --path $(PWD)
 	@cargo install --locked --path $(PWD)
 
-cargo-br-tokio:cargo-build-release-tokio### 	cargo-br-tokio
+cargo-br-tokio:cargo-build-release-tokio
 ## 	make cargo-br-tokio q=true
 
-cargo-build-release-tokio:### 	cargo-build-release-tokio
+cargo-build-release-tokio:
 ## 	make cargo-build-release-tokio q=true
 	@. $(HOME)/.cargo/env
 	@cargo b $(QUIET) --profile=$(PROFILE) --no-default-features --features tokio
@@ -41,7 +41,7 @@ cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
 
-cargo-check-tokio:### 	cargo-check-tokio
+cargo-check-tokio:
 ## cargo c --no-default-features --features tokio
 	@. $(HOME)/.cargo/env
 	@cargo check --no-default-features --features tokio
@@ -56,8 +56,8 @@ cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench
 
-cargo-tt:cargo-test-tokio### 	cargo-tt
-cargo-test-tokio:### 	cargo-test-tokio
+cargo-tt:cargo-test-tokio
+cargo-test-tokio:
 ## cargo tt
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features tokio
 
@@ -70,14 +70,13 @@ cargo-jits:### 	cargo-jits
 ## cargo-jits
 	@. $(HOME)/.cargo/env && $(MAKE) cargo-t-jit-tokio cargo-t-jit-as
 
-cargo-t-jit-tokio:cargo-test-js-interop-tokio### 	cargo-test-jit-tokio
+cargo-t-jit-tokio:cargo-test-js-interop-tokio
 cargo-test-js-interop-tokio:
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features js_interop_tests,tokio
 
 cargo-t-jit-as:cargo-test-js-interop-async-std### 	cargo-test-jit-as
 cargo-test-js-interop-async-std:
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features js_interop_tests,async-std
-
 cargo-test-benches:### 	cargo-test-benches
 	cargo test --benches
 
