@@ -3,8 +3,8 @@
 cargo-help:### 	cargo-help
 	@awk 'BEGIN {FS = ":.*?###"} /^[a-zA-Z_-]+:.*?###/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-cargo-bt:cargo-build-tokio### 	cargo-bt
-cargo-build-tokio:### 	cargo-build-tokio
+cargo-bt:cargo-build-tokio
+cargo-build-tokio:
 ## 	make cargo-build-tokio q=true
 	@. $(HOME)/.cargo/env
 	@RUST_BACKTRACE=all cargo b $(QUIET) --no-default-features --features tokio
