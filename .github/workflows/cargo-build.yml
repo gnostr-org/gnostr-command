@@ -73,15 +73,9 @@ jobs:
         run: |
           make cargo-b-release
 
-      - name: cargo-build-release-tokio
-        run: |
-          make cargo-build-release-tokio
-
       - name: cargo-build-release-async-std
         run: |
           make cargo-build-release-async-std
-
-
 
       - name: Run tests
         run: source "$HOME/.cargo/env" && cargo test --verbose
