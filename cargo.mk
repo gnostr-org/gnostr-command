@@ -3,8 +3,8 @@
 cargo-help:### 	cargo-help
 	@awk 'BEGIN {FS = ":.*?###"} /^[a-zA-Z_-]+:.*?###/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-cargo-bt:cargo-build-tokio### 	cargo-bt
-cargo-build-tokio:### 	cargo-build-tokio
+cargo-bt:cargo-build-tokio
+cargo-build-tokio:
 ## 	make cargo-build-tokio q=true
 	@. $(HOME)/.cargo/env
 	@RUST_BACKTRACE=all cargo b $(QUIET) --no-default-features --features tokio
@@ -20,10 +20,10 @@ cargo-install:### 	cargo install --path .
 	#@cargo install --path $(PWD)
 	@cargo install --locked --path $(PWD)
 
-cargo-br-tokio:cargo-build-release-tokio### 	cargo-br-tokio
+cargo-br-tokio:cargo-build-release-tokio
 ## 	make cargo-br-tokio q=true
 
-cargo-build-release-tokio:### 	cargo-build-release-tokio
+cargo-build-release-tokio:
 ## 	make cargo-build-release-tokio q=true
 	@. $(HOME)/.cargo/env
 	@cargo b $(QUIET) --profile=$(PROFILE) --no-default-features --features tokio
@@ -41,7 +41,7 @@ cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
 
-cargo-check-tokio:### 	cargo-check-tokio
+cargo-check-tokio:
 ## cargo c --no-default-features --features tokio
 	@. $(HOME)/.cargo/env
 	@cargo check --no-default-features --features tokio
@@ -56,28 +56,52 @@ cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench
 
-cargo-tt:cargo-test-tokio### 	cargo-tt
-cargo-test-tokio:### 	cargo-test-tokio
-## cargo tt
+cargo-examples:### 	cargo-examples
+## cargo b --examples
+	@. $(HOME)/.cargo/env
+	@cargo b --examples
+
+cargo-example-disk:### 	cargo-example-disk
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example disk
+
+cargo-example-memory:### 	cargo-example-memory
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example memory
+
+cargo-example-template:### 	cargo-example-template
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	@cargo run --example template
+
+cargo-example-replication:### 	cargo-example-replication
+## cargo run --example
+	@. $(HOME)/.cargo/env
+	cargo run --example replication
+
+cargo-t-tok:cargo-test-tokio
+cargo-test-tokio:
+## cargo-t-tok
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features tokio
 
-cargo-ts:cargo-test-async-std### 	cargo-ts
+cargo-t-async:cargo-test-async-std### 	cargo-t-async
 cargo-test-async-std:### 	cargo-test-async-std
-## cargo ts
+## cargo t-async
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features async-std
 
 cargo-jits:### 	cargo-jits
 ## cargo-jits
 	@. $(HOME)/.cargo/env && $(MAKE) cargo-t-jit-tokio cargo-t-jit-as
 
-cargo-t-jit-tokio:cargo-test-js-interop-tokio### 	cargo-test-jit-tokio
+cargo-t-jit-tokio:cargo-test-js-interop-tokio
 cargo-test-js-interop-tokio:
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features js_interop_tests,tokio
 
 cargo-t-jit-as:cargo-test-js-interop-async-std### 	cargo-test-jit-as
 cargo-test-js-interop-async-std:
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features js_interop_tests,async-std
-
 cargo-test-benches:### 	cargo-test-benches
 	cargo test --benches
 
