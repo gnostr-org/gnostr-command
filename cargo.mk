@@ -56,14 +56,14 @@ cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench
 
-cargo-tt:cargo-test-tokio
+cargo-t-tok:cargo-test-tokio
 cargo-test-tokio:
-## cargo tt
+## cargo-t-tok
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features tokio
 
-cargo-ts:cargo-test-async-std### 	cargo-ts
+cargo-t-async:cargo-test-async-std### 	cargo-t-async
 cargo-test-async-std:### 	cargo-test-async-std
-## cargo ts
+## cargo t-async
 	@. $(HOME)/.cargo/env && cargo test --no-default-features --features async-std
 
 cargo-jits:### 	cargo-jits
