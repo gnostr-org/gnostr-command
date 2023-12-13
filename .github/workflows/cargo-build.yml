@@ -56,10 +56,7 @@ jobs:
       - name: sudo apt-get install -y make
         run: |
           printenv && sudo apt-get update && \
-          sudo apt-get install -y make #\
-          #python3 \
-          #make autoconf automake \
-          #libtool gettext util-linux bash cmake clang
+          sudo apt-get install -y make
 
       - name: cargo-c
         run: |
@@ -73,15 +70,9 @@ jobs:
         run: |
           make cargo-b-release
 
-      - name: cargo-build-release-tokio
-        run: |
-          make cargo-build-release-tokio
-
       - name: cargo-build-release-async-std
         run: |
           make cargo-build-release-async-std
-
-
 
       - name: Run tests
         run: source "$HOME/.cargo/env" && cargo test --verbose
