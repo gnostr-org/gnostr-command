@@ -6,17 +6,17 @@ cargo-help:### 	cargo-help
 cargo-bt:cargo-build-tokio### 	cargo-bt
 cargo-build-tokio:### 	cargo-build-tokio
 ## 	make cargo-build-tokio q=true
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@RUST_BACKTRACE=all cargo b $(QUIET) --no-default-features --features tokio
 
 cargo-bas:cargo-build-async-std### 	cargo-bas
 cargo-build-async-std:### 	cargo-build-async-std
 ## 	make cargo-build-async-std q=true
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@RUST_BACKTRACE=all cargo b $(QUIET) --no-default-features --features async-std
 
 cargo-install:### 	cargo install --path .
-#@. $(HOME)/.cargo/env
+#@. $(HOME)/.cargo/env || true
 	#@cargo install --path $(PWD)
 	@cargo install --locked --path $(PWD)
 
@@ -25,7 +25,7 @@ cargo-br-tokio:cargo-build-release-tokio### 	cargo-br-tokio
 
 cargo-build-release-tokio:### 	cargo-build-release-tokio
 ## 	make cargo-build-release-tokio q=true
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo b $(QUIET) --profile=$(PROFILE) --no-default-features --features tokio
 
 cargo-br-async-std:cargo-build-release-async-std### 	cargo-br-async-std
@@ -33,27 +33,27 @@ cargo-br-async-std:cargo-build-release-async-std### 	cargo-br-async-std
 
 cargo-build-release-async-std:### 	cargo-build-release-async-std
 ## 	make cargo-build-release-async-std q=true
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo b $(QUIET) --profile=$(PROFILE) --no-default-features --features async-std
 
 cargo-check:### 	cargo-check
 ## cargo c
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo c
 
 cargo-check-tokio:### 	cargo-check-tokio
 ## cargo c --no-default-features --features tokio
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo check --no-default-features --features tokio
 
 cargo-check-async-std:### 	cargo-check-async-std
 ## cargo c --no-default-features --features async-std
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo check --no-default-features --features async-std
 
 cargo-bench:### 	cargo-bench
 ## cargo bench
-	@. $(HOME)/.cargo/env
+	@. $(HOME)/.cargo/env || true
 	@cargo bench
 
 cargo-tt:cargo-test-tokio### 	cargo-tt
